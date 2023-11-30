@@ -44,11 +44,11 @@ public class Member extends BaseEntity {
     private String address;
 
     @Column(nullable = false, length = 40)
-    private String spec_address;
+    private String specAddress;
 
-    private LocalDate inactive_date;
+    private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = true, length = 50)
     private String email;
 
     private Integer point;

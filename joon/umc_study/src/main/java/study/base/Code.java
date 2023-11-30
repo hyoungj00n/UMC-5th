@@ -28,8 +28,12 @@ public enum Code {
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
     TEST_EXCEPTION(HttpStatus.BAD_REQUEST,"TEST4001","테스트 exception"),
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST,"MEMBER4003","카테고리가 존재하지 않습니다."),
+
     // Article Error
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
+
+
 
     private final HttpStatus httpStatus;
     private final String code;
