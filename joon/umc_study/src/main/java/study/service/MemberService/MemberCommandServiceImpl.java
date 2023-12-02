@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.coyote.ErrorState;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import study.base.Code;
+import study.base.ErrorStatus;
 import study.base.exception.handler.FoodCategoryHandler;
 import study.converter.MemberConverter;
 import study.converter.MemberPreferConverter;
@@ -29,11 +29,12 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
     @Override
     @Transactional
-    public Member joinMember(MemberRequestDTO.JoinDto request){
+    public Member joinMember(MemberRequestDTO.JoinDto request) {
+
         Member newMember = MemberConverter.toMember(request);
         List<FoodCategory> foodCategoryList = request.getPreferCategory().stream()
-                .map(category ->{
-                    return foodCategoryRepository.findById(category).orElseThrow(() -> new FoodCategoryHandler(Code.FOOD_CATEGORY_NOT_FOUND));
+                .map(category -> {
+                    return foodCategoryRepository.findById(category).orElseThrow(() -> new FoodCategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND));
                 }).collect(Collectors.toList());
 
         List<MemberPrefer> memberPreferList = MemberPreferConverter.toMemberPreferList(foodCategoryList);
@@ -41,6 +42,5 @@ public class MemberCommandServiceImpl implements MemberCommandService{
         memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
 
         return memberRepository.save(newMember);
-
     }
 }

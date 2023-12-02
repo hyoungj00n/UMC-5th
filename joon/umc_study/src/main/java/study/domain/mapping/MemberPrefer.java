@@ -1,6 +1,6 @@
 package study.domain.mapping;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import study.domain.Member;
 import study.domain.common.BaseEntity;
