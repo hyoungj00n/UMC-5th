@@ -1,5 +1,5 @@
 package study.domain;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import study.domain.common.BaseEntity;
 import study.domain.mapping.MemberMission;
