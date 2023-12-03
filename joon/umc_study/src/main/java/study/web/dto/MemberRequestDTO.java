@@ -1,6 +1,7 @@
 package study.web.dto;
 
 import lombok.Getter;
+import study.validation.annotation.ExistCategories;
 
 import java.util.List;
 
@@ -11,11 +12,9 @@ public class MemberRequestDTO {
         String name;
         Integer gender;
         Integer age;
-        Integer birthYear;
-        Integer birthMonth;
-        Integer birthDay;
         String address;
         String specAddress;
+        @ExistCategories
         List<Long> preferCategory;
     }
 }
