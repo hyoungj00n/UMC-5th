@@ -26,5 +26,24 @@ public class Store extends BaseEntity {
     private Float score;
 
     @OneToMany(mappedBy = "store")
-    private List<Mission> missions = new ArrayList<>();
+    private List<Mission> missionList = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+
+    public void setRegion(Region region){
+        if (this.region != null){
+            region.getStoreList().remove(this);
+        }
+        this.region = region;
+        region.getStoreList().add(this);
+    }
+
+
+
 }
