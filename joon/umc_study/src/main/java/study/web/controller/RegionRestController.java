@@ -7,6 +7,7 @@ import study.base.ApiResponse;
 import study.converter.RegionConverter;
 import study.domain.Store;
 import study.service.RegionService.RegionCommandService;
+import study.validation.annotation.ExistRegion;
 import study.web.dto.RegionRequestDTO;
 import study.web.dto.RegionResponseDTO;
 
@@ -20,7 +21,7 @@ public class RegionRestController {
 
     @PostMapping("/{regionId}/store")
     public ApiResponse<RegionResponseDTO.CreateStoreResultDTO> createStore(@RequestBody RegionRequestDTO.StoreDTO request,
-                                                                            @PathVariable(name ="regionId") Long regionId){
+                                                                            @ExistRegion @PathVariable(name ="regionId") Long regionId){
         Store store = regionCommandService.createStore(regionId,request);
         return ApiResponse.onSuccess(RegionConverter.toCreateStoreResultDTO(store));
 
