@@ -8,6 +8,8 @@ import study.converter.ReviewConverter;
 import study.domain.Review;
 import study.repository.StoreRepository;
 import study.service.StoreService.StoreCommandService;
+import study.validation.annotation.ExistMember;
+import study.validation.annotation.ExistStore;
 import study.web.dto.StoreRequestDTO;
 import study.web.dto.StoreResponseDTO;
 
@@ -21,8 +23,8 @@ public class StoreRestController {
 
     @PostMapping("/{storeId}/review/{memberId}")
     public ApiResponse<StoreResponseDTO.CreateReviewResultDTO> createReview(@RequestBody StoreRequestDTO.ReviewDTO request,
-                                                                            @PathVariable(name = "storeId") Long storeId,
-                                                                            @PathVariable(name = "memberId") Long memberId
+                                                                            @ExistStore @PathVariable(name = "storeId") Long storeId,
+                                                                            @ExistMember @PathVariable(name = "memberId") Long memberId
     ){
         Review review = storeCommandService.createReview(storeId,memberId,request);
         return ApiResponse.onSuccess(ReviewConverter.toCreateReviewResult(review));
