@@ -33,6 +33,6 @@ public class RegionExistValidator implements ConstraintValidator<ExistRegion,Lon
             context.buildConstraintViolationWithTemplate(ErrorStatus.REGION_NOT_FOUND.toString()).addConstraintViolation();
             return false;
         }
-        return false;
+        return true;
     }
 }
