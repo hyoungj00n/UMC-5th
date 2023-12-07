@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.base.ApiResponse;
+import study.converter.MissionConverter;
 import study.converter.ReviewConverter;
+import study.domain.Mission;
 import study.domain.Review;
 import study.repository.StoreRepository;
 import study.service.StoreService.StoreCommandService;
@@ -21,6 +23,7 @@ public class StoreRestController {
 
     private final StoreCommandService storeCommandService;
 
+
     @PostMapping("/{storeId}/review/{memberId}")
     public ApiResponse<StoreResponseDTO.CreateReviewResultDTO> createReview(@RequestBody StoreRequestDTO.ReviewDTO request,
                                                                             @ExistStore @PathVariable(name = "storeId") Long storeId,
@@ -28,5 +31,13 @@ public class StoreRestController {
     ){
         Review review = storeCommandService.createReview(storeId,memberId,request);
         return ApiResponse.onSuccess(ReviewConverter.toCreateReviewResult(review));
+    }
+
+    @PostMapping("/{storeId}/mission/{memberId}")
+    public ApiResponse<StoreResponseDTO.CreateMissionResultDTO> createMission(@RequestBody StoreRequestDTO.MissionDTO request,
+                                                                              @ExistStore @PathVariable(name = "storeId") Long storeId,
+                                                                              @ExistMember @PathVariable(name = "memberId") Long memberId){
+        Mission mission = storeCommandService.createMission(memberId,storeId,request);
+        return ApiResponse.onSuccess(MissionConverter.toCreateMissionResult(mission));
     }
 }
