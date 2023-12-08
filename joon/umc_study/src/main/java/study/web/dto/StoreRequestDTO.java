@@ -26,6 +26,6 @@ public class StoreRequestDTO {
         private LocalDate deadline;
 
         private String missionSpec;
-        List<Long> memberList;
+
     }
 }

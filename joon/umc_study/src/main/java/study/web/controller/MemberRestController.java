@@ -4,10 +4,7 @@ package study.web.controller;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import study.base.ApiResponse;
 import study.converter.MemberConverter;
 import study.domain.Member;
@@ -29,4 +26,6 @@ public class MemberRestController {
         Member member = memberCommandService.joinMember(request);
         return ApiResponse.onSuccess(MemberConverter.toJoinResultDTO(member));
     }
+
+    @PutMapping
 }

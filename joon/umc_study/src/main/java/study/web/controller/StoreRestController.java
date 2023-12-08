@@ -33,11 +33,10 @@ public class StoreRestController {
         return ApiResponse.onSuccess(ReviewConverter.toCreateReviewResult(review));
     }
 
-    @PostMapping("/{storeId}/mission/{memberId}")
+    @PostMapping("/{storeId}/mission")
     public ApiResponse<StoreResponseDTO.CreateMissionResultDTO> createMission(@RequestBody StoreRequestDTO.MissionDTO request,
-                                                                              @ExistStore @PathVariable(name = "storeId") Long storeId,
-                                                                              @ExistMember @PathVariable(name = "memberId") Long memberId){
-        Mission mission = storeCommandService.createMission(memberId,storeId,request);
+                                                                              @ExistStore @PathVariable(name = "storeId") Long storeId){
+        Mission mission = storeCommandService.createMission(request,storeId);
         return ApiResponse.onSuccess(MissionConverter.toCreateMissionResult(mission));
     }
 }
