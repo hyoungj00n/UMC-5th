@@ -3,6 +3,7 @@ package study.web.dto;
 import lombok.Getter;
 import study.validation.annotation.ExistCategories;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MemberRequestDTO {
@@ -17,4 +18,6 @@ public class MemberRequestDTO {
         @ExistCategories
         List<Long> preferCategory;
     }
+
+
 }

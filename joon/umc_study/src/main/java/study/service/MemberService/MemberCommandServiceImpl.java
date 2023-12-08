@@ -1,21 +1,25 @@
 package study.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.ErrorState;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.base.ErrorStatus;
 import study.base.exception.handler.FoodCategoryHandler;
 import study.converter.MemberConverter;
+import study.converter.MemberMissionConverter;
 import study.converter.MemberPreferConverter;
 import study.domain.FoodCategory;
 import study.domain.Member;
+import study.domain.Mission;
+import study.domain.mapping.MemberMission;
 import study.domain.mapping.MemberPrefer;
 import study.repository.FoodCategoryRepository;
 import study.repository.MemberRepository;
+import study.repository.MissionRepository;
 import study.web.dto.MemberRequestDTO;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +30,11 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     private final MemberRepository memberRepository;
 
     private final FoodCategoryRepository foodCategoryRepository;
+
+    private final MissionRepository missionRepository;
+
+
+
 
     @Override
     @Transactional
@@ -42,5 +51,20 @@ public class MemberCommandServiceImpl implements MemberCommandService{
         memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
 
         return memberRepository.save(newMember);
+    }
+
+    @Override
+    @Transactional
+    public Member joinMemberMission(Long memberId, Long missionId) {
+
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        Mission mission = missionRepository.findById(missionId).orElseThrow();
+        MemberMission memberMission = MemberMissionConverter.toMemberMission(member,mission);
+        memberMission.setMission(mission);
+
+
+        return member;
+
+
     }
 }

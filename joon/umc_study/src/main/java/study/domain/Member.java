@@ -54,8 +54,6 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
-    private String email;
 
     @ColumnDefault("0")
     private Integer point;
@@ -71,6 +69,11 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    public void setMemberMissionList(MemberMission memberMission){
+        memberMissionList.add(memberMission);
+
+    }
 
 
 }

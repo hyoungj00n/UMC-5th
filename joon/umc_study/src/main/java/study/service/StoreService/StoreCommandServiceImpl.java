@@ -10,6 +10,7 @@ import study.converter.MissionConverter;
 import study.domain.Member;
 import study.domain.Mission;
 import study.domain.Review;
+import study.domain.Store;
 import study.domain.mapping.MemberMission;
 import study.repository.MemberRepository;
 import study.repository.MissionRepository;
@@ -18,6 +19,7 @@ import study.repository.StoreRepository;
 import study.web.dto.StoreRequestDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -44,15 +46,11 @@ public class StoreCommandServiceImpl implements StoreCommandService{
     }
 
     @Override
-    public Mission createMission(Long memberId, Long storeId, StoreRequestDTO.MissionDTO request){
+    public Mission createMission(StoreRequestDTO.MissionDTO request, Long storeId){
 
         Mission mission = MissionConverter.toMission(request);
 
-        List<Member> memberList = MemberConverter.toMemberList(request,memberRepository);
-
-        List<MemberMission> memberMissionList = MemberMissionConverter.toMemberMission(memberList);
-
-        memberMissionList.forEach(memberMission -> {memberMission.setMission(mission);});
+        mission.setStore(storeRepository.findById(storeId).get());
 
         return missionRepository.save(mission);
 
