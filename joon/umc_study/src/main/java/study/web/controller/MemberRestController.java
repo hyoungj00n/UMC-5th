@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import study.base.ApiResponse;
 import study.converter.MemberConverter;
 import study.domain.Member;
+import study.domain.mapping.MemberMission;
 import study.service.MemberService.MemberCommandService;
 import study.web.dto.MemberResponseDTO;
 import study.web.dto.MemberRequestDTO;
+
+import java.util.Optional;
 
 
 @RestController
@@ -27,5 +30,11 @@ public class MemberRestController {
         return ApiResponse.onSuccess(MemberConverter.toJoinResultDTO(member));
     }
 
-    @PutMapping
+    @PostMapping("/{memberId}/mission/{missionId}")
+    public ApiResponse<MemberResponseDTO.MemberMissionDTO> joinMission(@PathVariable(name = "memberId") Long memberId,
+                                                                       @PathVariable(name = "missionId") Long missionId
+    ){
+        Member member = memberCommandService.joinMemberMission(memberId,missionId);
+        return ApiResponse.onSuccess(MemberConverter.toJoinMissionResultDTO(member));
+    }
 }

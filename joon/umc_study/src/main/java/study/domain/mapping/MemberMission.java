@@ -6,6 +6,8 @@ import study.domain.Mission;
 import study.domain.common.BaseEntity;
 import study.domain.enums.MissionStatus;
 
+import java.util.Optional;
+
 @Entity
 @Getter
 @Builder
@@ -25,7 +27,7 @@ public class MemberMission extends BaseEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mssion_id")
+    @JoinColumn(name = "mission_id")
     private Mission mission;
 
     public void setMission(Mission mission){
