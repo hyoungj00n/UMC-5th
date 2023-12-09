@@ -8,6 +8,7 @@ import study.domain.Member;
 import study.domain.Mission;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MemberResponseDTO {
 
@@ -28,4 +29,6 @@ public class MemberResponseDTO {
         Long memberId;
         LocalDateTime createdAt;
     }
+
+
 }
