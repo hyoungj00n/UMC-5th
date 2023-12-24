@@ -2,6 +2,8 @@ package study.web.controller;
 
 
 import javax.validation.Valid;
+
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import study.converter.MemberConverter;
 import study.domain.Member;
 import study.domain.mapping.MemberMission;
 import study.service.MemberService.MemberCommandService;
+import study.service.MemberService.MemberQueryService;
 import study.web.dto.MemberResponseDTO;
 import study.web.dto.MemberRequestDTO;
 
@@ -24,6 +27,7 @@ public class MemberRestController {
 
     private final MemberCommandService memberCommandService;
 
+    private final MemberQueryService memberQueryService;
     @PostMapping("/")
     public ApiResponse<MemberResponseDTO.JoinResultDTO> join(@RequestBody MemberRequestDTO.JoinDto request){
         Member member = memberCommandService.joinMember(request);
@@ -37,4 +41,13 @@ public class MemberRestController {
         Member member = memberCommandService.joinMemberMission(memberId,missionId);
         return ApiResponse.onSuccess(MemberConverter.toJoinMissionResultDTO(member));
     }
+
+    @GetMapping("/{memberId}/missions/")
+    public ApiResponse<MemberResponseDTO.MemberMissionListDTO> getMissionList(@PathVariable(name = "memberId") Long memberId,
+                                                                                @RequestParam(name = "page") Integer page){
+
+        memberQueryService.getMissionList(memberId,page);
+        return null;
+    }
+
 }
