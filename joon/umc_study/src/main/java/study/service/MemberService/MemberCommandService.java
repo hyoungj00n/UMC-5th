@@ -11,4 +11,6 @@ public interface MemberCommandService {
     public Member joinMember(MemberRequestDTO.JoinDto request);
 
     public Member joinMemberMission(Long memberId, Long missionId);
+
+    public Member getMemberMissionList(Long memberId);
 }

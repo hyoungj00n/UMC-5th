@@ -10,10 +10,11 @@ import study.domain.Store;
 import study.repository.ReviewRepository;
 import study.repository.StoreRepository;
 
+
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class StoreQueryServiceImpl implements StoreQueryService{
 
