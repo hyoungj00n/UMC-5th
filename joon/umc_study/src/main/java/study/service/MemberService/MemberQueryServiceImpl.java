@@ -7,9 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import study.domain.Member;
 import study.domain.Mission;
+import study.domain.mapping.MemberMission;
+
 import study.repository.MemberRepository;
 import study.repository.MissionRepository;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 @RequiredArgsConstructor
@@ -19,17 +22,20 @@ public class MemberQueryServiceImpl implements MemberQueryService{
     private final MemberRepository memberRepository;
 
     private final MissionRepository missionRepository;
+
+
     @Override
     public Optional<Member> findMember(Long id) {
         return memberRepository.findById(id);
     }
 
     @Override
-    public Page<Mission> getMissionList(Long id, Integer page) {
-        Member member = memberRepository.findById(id).get();
+    public Page<Mission> getMissionList(Long memberId, Integer page) {
 
-        Page<Mission> MissionList = missionRepository.findAllByMember(member, PageRequest.of(page,10));
+
+        Page<Mission> MissionList = memberRepository.findMissionById(memberId, PageRequest.of(page,10));
 
         return MissionList;
+
     }
 }
