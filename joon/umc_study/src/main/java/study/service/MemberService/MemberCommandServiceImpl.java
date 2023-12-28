@@ -58,9 +58,9 @@ public class MemberCommandServiceImpl implements MemberCommandService{
     public Member joinMemberMission(Long memberId, Long missionId) {
 
         Member member = memberRepository.findById(memberId).orElseThrow();
-        Mission mission = missionRepository.findById(missionId).orElseThrow();
-        MemberMission memberMission = MemberMissionConverter.toMemberMission(member,mission);
-        memberMission.setMission(mission);
+        //Mission mission = missionRepository.findById(missionId).orElseThrow();
+        //MemberMission memberMission = MemberMissionConverter.toMemberMission(member,mission);
+        //memberMission.setMission(mission);
 
 
         return member;
@@ -68,11 +68,5 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
     }
 
-    @Override
-    @Transactional
-    public Member getMemberMissionList(Long memberId) {
 
-        Member member = memberRepository.findById(memberId).orElseThrow();
-
-    }
 }

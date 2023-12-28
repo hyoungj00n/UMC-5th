@@ -10,6 +10,8 @@ public interface MemberQueryService {
 
     Optional<Member> findMember(Long id);
 
-    public Page<Mission> getMissionList(Long id, Integer page);
+    public Page<Mission> getMissionList(Long memberId, Integer page);
+
+
 
 }

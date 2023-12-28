@@ -7,8 +7,11 @@ import study.domain.Member;
 import study.domain.Mission;
 import study.domain.Review;
 import study.domain.Store;
+import study.domain.mapping.MemberMission;
+
+import java.util.List;
 
 public interface MissionRepository extends JpaRepository<Mission,Long> {
 
-    Page<Mission> findAllByMember(Member member, PageRequest pageRequest);
+
 }
