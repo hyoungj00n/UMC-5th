@@ -8,11 +8,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import study.base.ApiResponse;
 import study.converter.MissionConverter;
 import study.converter.ReviewConverter;
+import study.converter.StoreConverter;
 import study.domain.Mission;
 import study.domain.Review;
 import study.repository.StoreRepository;
@@ -64,7 +66,7 @@ public class StoreRestController {
     })
     public ApiResponse<StoreResponseDTO.ReviewPreviewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId,
                                                                                 @RequestParam(name = "page") Integer page){
-        storeQueryService.getReviewList(storeId, page);
-        return null;
+        Page<Review> reviewList= storeQueryService.getReviewList(storeId, page);
+        return ApiResponse.onSuccess(StoreConverter.reviewPreviewListDTO(reviewList));
     }
 }

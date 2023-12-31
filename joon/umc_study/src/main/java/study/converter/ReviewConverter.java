@@ -2,6 +2,7 @@ package study.converter;
 
 
 import lombok.Builder;
+import org.springframework.data.domain.Page;
 import study.base.ApiResponse;
 import study.domain.Review;
 import study.web.dto.StoreRequestDTO;
@@ -24,4 +25,6 @@ public class ReviewConverter {
                 .createdAt(LocalDateTime.now())
                 .build();
     }
+
+
 }
