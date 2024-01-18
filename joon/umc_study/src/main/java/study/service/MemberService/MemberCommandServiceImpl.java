@@ -68,5 +68,11 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
     }
 
+    @Override
+    @Transactional
+    public void checkMemberMission(Long memberId, Long missionId) {
 
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        return;
+    }
 }

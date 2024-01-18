@@ -12,5 +12,7 @@ public interface MemberCommandService {
 
     public Member joinMemberMission(Long memberId, Long missionId);
 
+    public void checkMemberMission(Long memberId, Long missionId);
+
 
 }

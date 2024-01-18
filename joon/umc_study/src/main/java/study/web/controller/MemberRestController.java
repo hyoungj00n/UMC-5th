@@ -3,7 +3,7 @@ package study.web.controller;
 
 import javax.validation.Valid;
 
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -50,6 +50,14 @@ public class MemberRestController {
                                                                                 @RequestParam(name = "page") Integer page){
 
         memberQueryService.getMissionList(memberId,page);
+        return null;
+    }
+
+    @PutMapping("/{memberId}/mission/{missionId}")
+    public ApiResponse<MemberResponseDTO.MemberMissionDTO> putMissionCheck(@PathVariable(name = "memberId") Long memberId,
+                                                                           @PathVariable(name = "missionId") Long missionId){
+
+        memberCommandService.checkMemberMission(memberId,missionId);
         return null;
     }
 
